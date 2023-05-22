@@ -3,6 +3,7 @@ const store = require('../store')
 const User = require('../User')
 const Book = require('../Book')
 const router = express.Router()
+const fileMulter = require('../middleware/file')
 
 router.get('/api/books', (req, res) => {
     const {books} = store
@@ -66,6 +67,25 @@ router.delete('/api/books/:id', (req, res) => {
         res.status(404)
         res.json('404 | Страница не найдена')
     }
+})
+
+router.post('/api/books/:id/download', 
+    fileMulter.single('cover-img'),
+    (req, res) => {
+        const {id} = req.params
+        const {books} = store
+        const idx = books.findIndex(book => book.id === id)
+
+        if (req.file && idx !== -1) {
+            const {path} = req.file
+
+            books[idx] = {
+                ...books[idx],
+                fileBook : path
+            }
+            res.json({path})
+        }
+        res.json()
 })
 
 module.exports = router

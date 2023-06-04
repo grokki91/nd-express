@@ -15,10 +15,15 @@
                 <span>FileCover: </span><p class="card-title text-uppercase"><%= book.fileCover %></p>
                 <span>FileName: </span><p class="card-title text-uppercase"><%= book.fileName %></p>
                 <span>FileBook: </span><p class="card-title text-uppercase"><%= book.fileBook %></p>
-                <span>Favorite: </span><p class="card-title text-uppercase"><%= book.favorite %></p>
+                <span>Favorite: </span>
+                    <% if (book.favorite) { %>
+                        <p class="card-title text-uppercase">True</p>
+                    <% } else { %>
+                        <p class="card-title text-uppercase">False</p>
+                    <% } %>
 
                 <div class="text-right">
-                    <a class="btn btn-sm btn-primary" href="/api/books/update/<%= book.id %>">
+                    <a class="btn btn-sm btn-primary" href="/books/update/<%= book.id %>">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
                 </div>

@@ -33,7 +33,6 @@ router.post('/books/create',
         const {books} = store
         let {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
         const book = new Book(title, description, authors, favorite, fileCover, fileName, fileBook = path)
-        console.log('favorite = ', favorite);
         books.push(book)
         res.redirect('/books')
 })
@@ -42,8 +41,9 @@ router.get('/books/:id', (req, res) => {
     const {books} = store
     const {id} = req.params
     const idx = books.findIndex(book => book.id === id)
+
     if (idx !== - 1) {
-        console.log(books[idx]);
+        books[idx].count++
         res.render('books/view', {
             title: 'book | view',
             book: books[idx]
@@ -61,7 +61,6 @@ router.get('/books/update/:id', (req, res) => {
     const idx = books.findIndex(book => book.id === id)
 
     if (idx !== - 1) {
-        console.log(books[idx].favorite);
         res.render('books/update', {
             title: 'book | update',
             book: books[idx]

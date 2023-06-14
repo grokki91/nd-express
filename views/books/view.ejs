@@ -8,7 +8,9 @@
     <div class="col-sm-8">
         <div class="card">
             <div class="card-body">
-
+                <div class="text-right">
+                    <span>Views: <%= book.count %></span>
+                </div>
                 <span>Title: </span><p class="card-title text-uppercase"><%= book.title %></p>
                 <span>Description: </span><p class="card-title text-uppercase"><%= book.description %></p>
                 <span>Authors: </span><p class="card-title text-uppercase"><%= book.authors %></p>

@@ -7,7 +7,6 @@ const fileMulter = require('../../middleware/file')
 const pageNotFound = {message: '404 | Страница не найдена'}
 
 router.get('/api/books', (req, res) => {
-    console.log(store);
     const {books} = store
     res.json(books)
 })
@@ -32,9 +31,9 @@ router.post('/api/user/login', (req, res) => {
 })
 
 router.post('/api/books', 
-    fileMulter.single('cover-img'),
+    fileMulter.single('fileBook'),
     (req, res) => {
-        const {path} = req.file
+        const path = req.file.path
         const {books} = store
         let {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
         const book = new Book(title, description, authors, favorite, fileCover, fileName, fileBook = path)

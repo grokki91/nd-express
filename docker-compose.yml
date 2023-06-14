@@ -1,0 +1,14 @@
+services:
+  storage:
+    image: redis
+    volumes:
+      - ./public/data:/data
+  library:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - REDIS_URL=redis://storage
+      - PORT=3000
+    depends_on:
+      - storage

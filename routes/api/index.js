@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const store = require('../../store')
+const store = require('../../public/store')
 const User = require('../../User')
-const Book = require('../../Book')
+const Book = require('../../public/store/Book')
 const fileMulter = require('../../middleware/file')
 const pageNotFound = {message: '404 | Страница не найдена'}
 

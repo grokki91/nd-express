@@ -7,8 +7,17 @@ services:
     build: .
     ports:
       - 3000:3000
-    environment:
-      - REDIS_URL=redis://storage
-      - PORT=3000
     depends_on:
       - storage
+  counter:
+    image: grokki91/counter
+    volumes:
+      - ./public/store:/app/store
+    ports:
+      - 3001:3001
+    environment:
+      - REDIS_URL=redis://storage
+      - PORT=3001
+    depends_on:
+      - storage
+      - library

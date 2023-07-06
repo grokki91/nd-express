@@ -3,6 +3,7 @@ const store = require('../public/store')
 const Book = require('../public/store/Book')
 const router = express.Router()
 const fileMulter = require('../middleware/file')
+const getCounter = require('../getCounter')
 
 router.get('/', (req, res) => {
     res.render('index', {
@@ -46,7 +47,8 @@ router.get('/books/:id', (req, res) => {
         books[idx].count++
         res.render('books/view', {
             title: 'book | view',
-            book: books[idx]
+            book: books[idx],
+            counter: getCounter(id)
         })
     } else {
         res.render('errors/404', {

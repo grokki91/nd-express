@@ -3,7 +3,7 @@ const store = require('../public/store')
 const Book = require('../public/store/Book')
 const router = express.Router()
 const fileMulter = require('../middleware/file')
-const getCounter = require('../getCounter')
+const postCounter = require('../serviceCounter')
 
 router.get('/', (req, res) => {
     res.render('index', {
@@ -32,23 +32,23 @@ router.post('/books/create',
     (req, res) => {
         const path = req.file.path
         const {books} = store
-        let {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
+        let {title, description, authors, favorite, fileCover, fileName, fileBook, id} = req.body
+        id = String(books.length + 1)
         const book = new Book(title, description, authors, favorite, fileCover, fileName, fileBook = path)
         books.push(book)
         res.redirect('/books')
 })
 
-router.get('/books/:id', (req, res) => {
+router.get('/books/:id', async (req, res) => {
     const {books} = store
     const {id} = req.params
     const idx = books.findIndex(book => book.id === id)
 
     if (idx !== - 1) {
-        books[idx].count++
         res.render('books/view', {
             title: 'book | view',
             book: books[idx],
-            counter: getCounter(id)
+            counter: await postCounter(id)
         })
     } else {
         res.render('errors/404', {

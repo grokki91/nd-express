@@ -35,8 +35,9 @@ router.post('/api/books',
     (req, res) => {
         const path = req.file.path
         const {books} = store
-        let {title, description, authors, favorite, fileCover, fileName, fileBook} = req.body
-        const book = new Book(title, description, authors, favorite, fileCover, fileName, fileBook = path)
+        let {title, description, authors, favorite, fileCover, fileName, fileBook, id} = req.body
+        id = String(books.length + 1)
+        const book = new Book(id, title, description, authors, favorite, fileCover, fileName, fileBook = path)
         books.push(book)
         res.status(201)
         res.json(book)

@@ -33,9 +33,10 @@ router.post('/books/create',
         const path = req.file.path
         const {books} = store
         let {title, description, authors, favorite, fileCover, fileName, fileBook, id} = req.body
-        id = String(books.length + 1)
-        const book = new Book(title, description, authors, favorite, fileCover, fileName, fileBook = path)
+        const idNumber = String(books.length + 1)
+        const book = new Book(title, description, authors, favorite, fileCover, fileName, fileBook = path, id = idNumber)
         books.push(book)
+        console.log(book);
         res.redirect('/books')
 })
 

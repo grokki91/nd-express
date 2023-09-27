@@ -43,7 +43,6 @@ router.get('/books/:id', (req, res) => {
     const {id} = req.params
     const idx = books.findIndex(book => book.id === id)
     if (idx !== - 1) {
-        console.log(books[idx]);
         res.render('books/view', {
             title: 'book | view',
             book: books[idx]
@@ -61,7 +60,6 @@ router.get('/books/update/:id', (req, res) => {
     const idx = books.findIndex(book => book.id === id)
 
     if (idx !== - 1) {
-        console.log(books[idx].favorite);
         res.render('books/update', {
             title: 'book | update',
             book: books[idx]

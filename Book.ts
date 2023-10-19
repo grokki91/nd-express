@@ -13,6 +13,11 @@ interface IBook {
     fileBook: string
 }
 
+const TYPES = {
+    IBook: Symbol.for('IBook')
+}
+
+
 abstract class BooksRepository {
     createBook(book: IBook): void {
         

@@ -1,6 +1,8 @@
 import { v4 as uuid } from 'uuid';
+import 'reflect-metadata'
+import { injectable, inject } from "inversify";
 
-export interface IBook {
+interface IBook {
     id: string,
     title: string,
     description: string,
@@ -33,7 +35,8 @@ abstract class BooksRepository {
     }
 }
 
-class Book implements IBook {
+@injectable()
+export class Book implements IBook {
     public id: string
     public title: string
     public description: string 

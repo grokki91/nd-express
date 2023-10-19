@@ -3,6 +3,7 @@ const store = require('../public/store')
 const Book = require('../public/store/Book')
 const router = express.Router()
 const fileMulter = require('../middleware/file')
+const container = require('../container')
 
 router.get('/', (req, res) => {
     res.render('index', {
@@ -93,6 +94,12 @@ router.post('/books/update/:id',
             }
             res.redirect(`/books/${id}`)
         }
+})
+
+router.get(':id', async (req, res, next) => {
+    const repo = container.get(BooksRepository);
+    const book = await repo.getBook(req.params.id);
+    res.json(book);
 })
 
 module.exports = router

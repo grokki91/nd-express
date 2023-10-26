@@ -1,9 +1,9 @@
-const express = require('express')
-const mongo = require('mongoose')
+import express from 'express'
+import mongoose from 'mongoose'
+import routes from './routes'
+import api from './routes/api'
+import 'dotenv/config'
 const app = express()
-const routes = require('./routes')
-const api = require('./routes/api')
-require('dotenv').config()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -12,9 +12,9 @@ app.use('/public', express.static(__dirname+'/public'))
 app.use('/', routes)
 app.use('/', api);
 
-async function start(url, PORT) {
+async function start(url: any, PORT: any) {
     try {
-        await mongo.connect(url)
+        await mongoose.connect(url)
         app.listen(PORT)
     } catch (error) {
         console.log(error);

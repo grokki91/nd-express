@@ -18,7 +18,7 @@ const TYPES = {
 }
 
 
-abstract class BooksRepository {
+export default abstract class BooksRepository {
     createBook(book: IBook): void {
         
     } 
